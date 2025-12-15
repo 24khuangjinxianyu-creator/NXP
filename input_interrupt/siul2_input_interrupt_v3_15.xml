@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ksdk:examples xmlns:ksdk="http://nxp.com/ksdk/2.0/ksdk_manifest_v3.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nxp.com/ksdk/2.0/ksdk_manifest_v3.0.xsd manifest.xsd">
+  <externalDefinitions>
+    <definition extID="core0_MCXE31B"/>
+    <definition extID="platform.drivers.boot_header_board.frdmmcxe31b.MCXE31B"/>
+    <definition extID="platform.drivers.clock.MCXE31B"/>
+    <definition extID="platform.drivers.memory.MCXE31B"/>
+    <definition extID="platform.drivers.siul2.MCXE31B"/>
+    <definition extID="CMSIS_Include_core_cm.MCXE31B"/>
+    <definition extID="device.MCXE31B_CMSIS.MCXE31B"/>
+    <definition extID="platform.devices.MCXE31B_system.MCXE31B"/>
+    <definition extID="device.MCXE31B_startup.MCXE31B"/>
+    <definition extID="platform.drivers.cache_armv7_m7.MCXE31B"/>
+    <definition extID="platform.drivers.common.MCXE31B"/>
+    <definition extID="platform.drivers.lpuart.MCXE31B"/>
+    <definition extID="platform.utilities.assert_lite.MCXE31B"/>
+    <definition extID="platform.utilities.misc_utilities.MCXE31B"/>
+    <definition extID="utility.str.MCXE31B"/>
+    <definition extID="utility.debug_console_lite.MCXE31B"/>
+    <definition extID="component.lpuart_adapter.MCXE31B"/>
+    <definition extID="iar"/>
+    <definition extID="mdk"/>
+    <definition extID="armgcc"/>
+    <definition extID="mcuxpresso"/>
+    <definition extID="com.nxp.mcuxpresso"/>
+    <definition extID="com.crt.advproject.config.exe.debug"/>
+    <definition extID="com.crt.advproject.config.exe.release"/>
+  </externalDefinitions>
+  <example id="frdmmcxe31b_siul2_input_interrupt" name="siul2_input_interrupt" device_core="core0_MCXE31B" dependency="platform.drivers.boot_header_board.frdmmcxe31b.MCXE31B platform.drivers.clock.MCXE31B platform.drivers.memory.MCXE31B platform.drivers.siul2.MCXE31B CMSIS_Include_core_cm.MCXE31B device.MCXE31B_CMSIS.MCXE31B platform.devices.MCXE31B_system.MCXE31B device.MCXE31B_startup.MCXE31B platform.drivers.cache_armv7_m7.MCXE31B platform.drivers.common.MCXE31B platform.drivers.lpuart.MCXE31B platform.utilities.assert_lite.MCXE31B platform.utilities.misc_utilities.MCXE31B utility.str.MCXE31B utility.debug_console_lite.MCXE31B component.lpuart_adapter.MCXE31B" category="driver_examples/siul2">
+    <projects>
+      <project type="com.crt.advproject.projecttype.exe" nature="org.eclipse.cdt.core.cnature"/>
+    </projects>
+    <memory>
+      <memoryBlock id="PROGRAM_FLASH_frdmmcxe31b" name="PROGRAM_FLASH" addr="00400000" size="00400000" type="Flash" access="RO"/>
+      <memoryBlock id="DATA_FLASH_frdmmcxe31b" name="DATA_FLASH" addr="10000000" size="00020000" type="Flash" access="RW"/>
+      <memoryBlock id="SRAM_DATA_frdmmcxe31b" name="SRAM_DATA" addr="20408000" size="00048000" type="RAM" access="RW"/>
+      <memoryBlock id="DTCM_frdmmcxe31b" name="DTCM" addr="20004000" size="0000C000" type="RAM" access="RW"/>
+      <memoryBlock id="ITCM_frdmmcxe31b" name="ITCM" addr="00000000" size="00008000" type="RAM" access="RW"/>
+      <memoryBlock id="NCACHE_REGION_frdmmcxe31b" name="NCACHE_REGION" addr="20000000" size="00004000" type="RAM" access="RW"/>
+    </memory>
+    <toolchainSettings>
+      <toolchainSetting id_refs="com.nxp.mcuxpresso">
+        <option id="gnu.c.compiler.option.preprocessor.def.symbols" type="stringList">
+          <value>MCUXPRESSO_SDK</value>
+          <value>SDK_DEBUGCONSOLE=1</value>
+          <value>MCUX_META_BUILD</value>
+          <value>CPU_MCXE31BMPB</value>
+          <value>MCXE31B_SERIES</value>
+          <value>BOOT_HEADER_ENABLE=1</value>
+        </option>
+        <option id="com.crt.advproject.link.memory.sections" type="stringList">
+          <value>isd=*(CodeQuickAccess);region=ITCM;type=.data</value>
+          <value>isd=*(DataQuickAccess);region=DTCM;type=.data</value>
+          <value>isd=*(NonCacheable.init);region=NCACHE_REGION;type=.data</value>
+          <value>isd=*(NonCacheable);region=NCACHE_REGION;type=.bss</value>
+        </option>
+        <option id="com.crt.advproject.link.fpu" type="enum">
+          <value>com.crt.advproject.link.fpu.fpv5sp.hard</value>
+        </option>
+        <option id="gnu.c.link.option.nostdlibs" type="boolean">
+          <value>true</value>
+        </option>
+        <option id="gnu.c.link.option.other" type="stringList">
+          <value>-no-warn-rwx-segments</value>
+        </option>
+        <option id="gnu.c.link.option.group" type="boolean">
+          <value>true</value>
+        </option>
+        <option id="com.crt.advproject.gas.fpu" type="enum">
+          <value>com.crt.advproject.gas.fpu.fpv5sp.hard</value>
+        </option>
+        <option id="com.crt.advproject.gcc.fpu" type="enum">
+          <value>com.crt.advproject.gcc.fpu.fpv5sp.hard</value>
+        </option>
+        <option id="gnu.c.compiler.option.optimization.flags" type="string">
+          <value>-fno-common</value>
+        </option>
+        <option id="com.crt.advproject.c.misc.dialect" type="enum">
+          <value>com.crt.advproject.misc.dialect.gnu99</value>
+        </option>
+        <option id="gnu.c.compiler.option.misc.other" type="string">
+          <value>-c -ffunction-sections -fdata-sections -fno-builtin</value>
+        </option>
+        <option id="gnu.c.compiler.option.warnings.allwarn" type="boolean">
+          <value>false</value>
+        </option>
+        <option id="gnu.c.compiler.option.warnings.toerrors" type="boolean">
+          <value>false</value>
+        </option>
+      </toolchainSetting>
+    </toolchainSettings>
+    <debug_configurations>
+      <debug_configuration id_refs="com.crt.advproject.config.exe.debug com.crt.advproject.config.exe.release">
+        <drivers>
+          <driver id_refs="PROGRAM_FLASH_frdmmcxe31b">
+            <driverBinary path="../../../../../devices/MCXE31B/mcuxpresso" project_relative_path="binary" type="binary">
+              <files mask="MCXE31x.cfx"/>
+            </driverBinary>
+          </driver>
+          <driver id_refs="DATA_FLASH_frdmmcxe31b">
+            <driverBinary path="../../../../../devices/MCXE31B/mcuxpresso" project_relative_path="binary" type="binary">
+              <files mask="MCXE31x_D.cfx"/>
+            </driverBinary>
+          </driver>
+        </drivers>
+      </debug_configuration>
+    </debug_configurations>
+    <include_paths>
+      <include_path path="." project_relative_path="source" type="c_include"/>
+      <include_path path="." project_relative_path="board" type="c_include"/>
+      <include_path path="." project_relative_path="source" type="asm_include"/>
+    </include_paths>
+    <source path="iar" project_relative_path="./" type="workspace" toolchain="iar">
+      <files mask="siul2_input_interrupt.ewd"/>
+      <files mask="siul2_input_interrupt.ewp"/>
+      <files mask="siul2_input_interrupt.eww"/>
+    </source>
+    <source path="mdk" project_relative_path="./" type="workspace" toolchain="mdk">
+      <files mask="siul2_input_interrupt.uvprojx"/>
+      <files mask="siul2_input_interrupt.uvoptx"/>
+      <files mask="JLinkSettings.ini"/>
+      <files mask="siul2_input_interrupt.uvmpw"/>
+    </source>
+    <source path="armgcc" project_relative_path="./" type="workspace" toolchain="armgcc">
+      <files mask="build_all.bat"/>
+      <files mask="build_all.sh"/>
+      <files mask="clean.bat"/>
+      <files mask="clean.sh"/>
+      <files mask="CMakeLists.txt"/>
+      <files mask="flags.cmake"/>
+      <files mask="config.cmake"/>
+      <files mask="build_debug.bat"/>
+      <files mask="build_debug.sh"/>
+      <files mask="build_release.bat"/>
+      <files mask="build_release.sh"/>
+    </source>
+    <source path="../../../../../devices/MCXE31B" project_relative_path="./" type="workspace" toolchain="armgcc">
+      <files mask="all_lib_device.cmake"/>
+    </source>
+    <source path="." project_relative_path="source" type="src">
+      <files mask="siul2_input_interrupt.c"/>
+    </source>
+    <source path="." project_relative_path="board" type="c_include">
+      <files mask="board.h"/>
+      <files mask="clock_config.h"/>
+    </source>
+    <source path="." project_relative_path="board" type="src">
+      <files mask="board.c"/>
+      <files mask="clock_config.c"/>
+    </source>
+    <source path="iar" project_relative_path="MCXE31B/iar" type="linker" toolchain="iar">
+      <files mask="MCXE31B_flash.icf"/>
+    </source>
+    <source path="armgcc" project_relative_path="MCXE31B/armgcc" type="linker" toolchain="armgcc">
+      <files mask="MCXE31B_flash.ld"/>
+    </source>
+    <source path="mdk" project_relative_path="MCXE31B/mdk" type="linker" toolchain="mdk">
+      <files mask="MCXE31B_flash.scf"/>
+    </source>
+    <source path="." project_relative_path="board" type="c_include">
+      <files mask="pin_mux.h"/>
+    </source>
+    <source path="." project_relative_path="board" type="src">
+      <files mask="pin_mux.c"/>
+    </source>
+    <source path="." project_relative_path="board" type="src">
+      <files mask="hardware_init.c"/>
+    </source>
+    <source path="." project_relative_path="board" type="c_include">
+      <files mask="app.h"/>
+    </source>
+    <source path="." project_relative_path="source" type="c_include">
+      <files mask="ZephyrMap_Gen.h"/>
+    </source>
+    <source path="." project_relative_path="source" type="c_preinclude">
+      <files mask="mcux_config.h"/>
+    </source>
+    <source path="." project_relative_path="doc" type="doc">
+      <files mask="readme.md"/>
+    </source>
+    <source path="." project_relative_path="doc" type="doc">
+      <files mask="example_board_readme.md"/>
+    </source>
+  </example>
+</ksdk:examples>
