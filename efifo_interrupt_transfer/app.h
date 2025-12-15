@@ -11,10 +11,6 @@
  ******************************************************************************/
 /*${macro:start}*/
 #define EXAMPLE_CAN FLEXCAN_0
-#define EXAMPLE_FLEXCAN_IRQn       FlexCAN0_1_IRQn
-#define EXAMPLE_FLEXCAN_IRQHandler FlexCAN0_1_IRQHandler
-
-#define RX_MESSAGE_BUFFER_NUM (1)
 #define TX_MESSAGE_BUFFER_NUM (0)
 
 /* Get frequency of flexcan clock */
