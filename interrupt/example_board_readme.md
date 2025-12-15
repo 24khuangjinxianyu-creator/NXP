@@ -5,31 +5,60 @@ Hardware requirements
 - Personal Computer
 
 Board settings
-============
-Connect the J4-8 to a voltage source.
+==============
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MASTER(LPI2C_1)                connect to        SLAVE(LPI2C_0)
+Pin Name    Board Location                      Pin Name    Board Location
+SCL         J2 pin 20                           SCL         J7 pin 6
+SDA         J2 pin 18                           SDA         J7 pin 8
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Other jumpers keep default configuration.
 
 Prepare the Demo
-===============
-1.  Connect a type-c USB cable between the host PC and the MCU-Link USB port (J13) on the target board.
-2.  Open a serial terminal with the following settings:
+================
+1. Connect a USB Type-C cable between the host PC and the MCU-Link USB port on the target board.
+2. Open a serial terminal on PC for the serial device with these settings:
     - 115200 baud rate
     - 8 data bits
     - No parity
     - One stop bit
     - No flow control
-3.  Download the program to the target board.
-4.  Either press the reset button on your board or launch the debugger in your IDE to begin running the demo.
+3. Download the program to the target board.
+4. Either press the reset button on your board or launch the debugger in your IDE to begin running
+   the demo.
 
 Running the demo
 ================
-This demo will measure the Bandgap via ADC0 channel 48, measure VREFH via ADC0 channel 55, measure user defined
-voltage via channel 5. In this demo, the user defined voltage is 1.67v.
+The following message shows in the terminal if the example runs successfully.
 
-When the example runs successfully, you will see similar information from the terminal shown below.
-~~~~~~~~~~~~~~~~~~~~~
- ADC interrupt example.
- Please press any key to get the conversion result.
- The channel 48 ADC conversion data is 12031.
- The channel 55 ADC conversion data is 32765.
- The channel 5 ADC conversion data is 16698.
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LPI2C example -- MasterFunctionalInterrupt_SlaveFunctionalInterrupt.
+Master will send data :
+0x 0  0x 1  0x 2  0x 3  0x 4  0x 5  0x 6  0x 7
+0x 8  0x 9  0x a  0x b  0x c  0x d  0x e  0x f
+0x10  0x11  0x12  0x13  0x14  0x15  0x16  0x17
+0x18  0x19  0x1a  0x1b  0x1c  0x1d  0x1e  0x1f
+
+Slave received data :
+0x 0  0x 1  0x 2  0x 3  0x 4  0x 5  0x 6  0x 7
+0x 8  0x 9  0x a  0x b  0x c  0x d  0x e  0x f
+0x10  0x11  0x12  0x13  0x14  0x15  0x16  0x17
+0x18  0x19  0x1a  0x1b  0x1c  0x1d  0x1e  0x1f
+
+This time , slave will send data:
+0xff  0xfe  0xfd  0xfc  0xfb  0xfa  0xf9  0xf8
+0xf7  0xf6  0xf5  0xf4  0xf3  0xf2  0xf1  0xf0
+0xef  0xee  0xed  0xec  0xeb  0xea  0xe9  0xe8
+0xe7  0xe6  0xe5  0xe4  0xe3  0xe2  0xe1  0xe0
+
+Master received data :
+0xff  0xfe  0xfd  0xfc  0xfb  0xfa  0xf9  0xf8
+0xf7  0xf6  0xf5  0xf4  0xf3  0xf2  0xf1  0xf0
+0xef  0xee  0xed  0xec  0xeb  0xea  0xe9  0xe8
+0xe7  0xe6  0xe5  0xe4  0xe3  0xe2  0xe1  0xe0
+
+End of I2C example .
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

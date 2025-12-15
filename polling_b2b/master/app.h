@@ -10,17 +10,13 @@
  * Definitions
  ******************************************************************************/
 /*${macro:start}*/
-#define EXAMPLE_LPI2C_MASTER_BASEADDR LPI2C_1
-#define EXAMPLE_LPI2C_SLAVE_BASEADDR  LPI2C_0
+#define EXAMPLE_I2C_MASTER_BASE (LPI2C_1_BASE)
 
-#define LPI2C_MASTER_CLOCK_FREQUENCY CLOCK_GetFreq(kCLOCK_Lpi2c1Clk)
-#define LPI2C_SLAVE_CLOCK_FREQUENCY  CLOCK_GetFreq(kCLOCK_Lpi2c0Clk)
+/* Get frequency of lpi2c clock */
+#define LPI2C_CLOCK_FREQUENCY CLOCK_GetFreq(kCLOCK_Lpi2c1Clk)
+#define LPI2C_MASTER_CLOCK_FREQUENCY LPI2C_CLOCK_FREQUENCY
+#define WAIT_TIME                    10U
 
-#define LPI2C_MASTER_IRQ LPI2C1_IRQn
-#define LPI2C_SLAVE_IRQ  LPI2C0_IRQn
-
-#define LPI2C_MASTER_IRQHandler LPI2C1_IRQHandler
-#define LPI2C_SLAVE_IRQHandler  LPI2C0_IRQHandler
 /*${macro:end}*/
 
 /*******************************************************************************

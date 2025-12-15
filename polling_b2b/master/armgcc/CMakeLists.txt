@@ -24,16 +24,16 @@ set(EXECUTABLE_OUTPUT_PATH ${ProjDirPath}/${CMAKE_BUILD_TYPE})
 set(LIBRARY_OUTPUT_PATH ${ProjDirPath}/${CMAKE_BUILD_TYPE})
 
 
-project(lpi2c_interrupt)
+project(lpi2c_polling_b2b_master)
 
 enable_language(ASM)
 
 set(MCUX_BUILD_TYPES debug release)
 
-set(MCUX_SDK_PROJECT_NAME lpi2c_interrupt.elf)
+set(MCUX_SDK_PROJECT_NAME lpi2c_polling_b2b_master.elf)
 
 if (NOT DEFINED SdkRootDirPath)
-    SET(SdkRootDirPath ${ProjDirPath}/../../../../../..)
+    SET(SdkRootDirPath ${ProjDirPath}/../../../../../../..)
 endif()
 
 include(${ProjDirPath}/flags.cmake)
@@ -41,7 +41,7 @@ include(${ProjDirPath}/flags.cmake)
 include(${ProjDirPath}/config.cmake)
 
 add_executable(${MCUX_SDK_PROJECT_NAME} 
-"${ProjDirPath}/../lpi2c_interrupt.c"
+"${ProjDirPath}/../lpi2c_polling_b2b_master.c"
 "${ProjDirPath}/../board.h"
 "${ProjDirPath}/../board.c"
 "${ProjDirPath}/../clock_config.h"
@@ -72,9 +72,9 @@ target_link_libraries(${MCUX_SDK_PROJECT_NAME} PRIVATE ${TARGET_LINK_SYSTEM_LIBR
 TARGET_LINK_LIBRARIES(${MCUX_SDK_PROJECT_NAME} PRIVATE -Wl,--end-group)
 
 ADD_CUSTOM_COMMAND(TARGET ${MCUX_SDK_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJCOPY}
--Obinary ${EXECUTABLE_OUTPUT_PATH}/${MCUX_SDK_PROJECT_NAME} ${EXECUTABLE_OUTPUT_PATH}/lpi2c_interrupt.bin)
+-Obinary ${EXECUTABLE_OUTPUT_PATH}/${MCUX_SDK_PROJECT_NAME} ${EXECUTABLE_OUTPUT_PATH}/lpi2c_polling_b2b_master.bin)
 
-set_target_properties(${MCUX_SDK_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES "output.map;${EXECUTABLE_OUTPUT_PATH}/lpi2c_interrupt.bin")
+set_target_properties(${MCUX_SDK_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES "output.map;${EXECUTABLE_OUTPUT_PATH}/lpi2c_polling_b2b_master.bin")
 
 # wrap all libraries with -Wl,--start-group -Wl,--end-group to prevent link order issue
 group_link_libraries()
