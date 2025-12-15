@@ -6,59 +6,33 @@ Hardware requirements
 
 Board settings
 ==============
+This example project uses LPCMP1 to compare the voltage signal input from channel 0(PTA0)
+with the voltage signal output by LPCMP's internal DAC.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MASTER(LPI2C_1)                connect to        SLAVE(LPI2C_0)
-Pin Name    Board Location                      Pin Name    Board Location
-SCL         J2 pin 20                           SCL         J7 pin 6
-SDA         J2 pin 18                           SDA         J7 pin 8
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Other jumpers keep default configuration.
+The voltage signal input from PTA0 corresponding J9-3 on FRDM-MCXE31B board should be changed
+to observe the dynamical IO state. You will see the red led toggle with the voltage change.
 
 Prepare the Demo
-================
-1. Connect a USB Type-C cable between the host PC and the MCU-Link USB port on the target board.
-2. Open a serial terminal on PC for the serial device with these settings:
+===============
+1.  Connect a type-c USB cable between the host PC and the MCU-Link USB port (J13) on the target board.
+2.  Open a serial terminal with the following settings:
     - 115200 baud rate
     - 8 data bits
     - No parity
     - One stop bit
     - No flow control
-3. Download the program to the target board.
-4. Either press the reset button on your board or launch the debugger in your IDE to begin running
-   the demo.
+3.  Download the program to the target board.
+4.  Either press the reset button on your board or launch the debugger in your IDE to begin running the demo.
 
 Running the demo
 ================
-The following message shows in the terminal if the example runs successfully.
+The following lines are printed to the serial terminal when the demo program is executed.
+The DAC reference comes from 1.2 V PMC bandgap reference in this project, note that the 1.2 V internal reference
+voltage is not available in Standby mode.
+When the voltage applied on J9-3 in higher than 0.6v, the LED will turn on.
+When the voltage applied on J9-3 in lower than 0.6v, the LED will turn off.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-LPI2C example -- MasterFunctionalInterrupt_SlaveFunctionalInterrupt.
-Master will send data :
-0x 0  0x 1  0x 2  0x 3  0x 4  0x 5  0x 6  0x 7
-0x 8  0x 9  0x a  0x b  0x c  0x d  0x e  0x f
-0x10  0x11  0x12  0x13  0x14  0x15  0x16  0x17
-0x18  0x19  0x1a  0x1b  0x1c  0x1d  0x1e  0x1f
-
-Slave received data :
-0x 0  0x 1  0x 2  0x 3  0x 4  0x 5  0x 6  0x 7
-0x 8  0x 9  0x a  0x b  0x c  0x d  0x e  0x f
-0x10  0x11  0x12  0x13  0x14  0x15  0x16  0x17
-0x18  0x19  0x1a  0x1b  0x1c  0x1d  0x1e  0x1f
-
-This time , slave will send data:
-0xff  0xfe  0xfd  0xfc  0xfb  0xfa  0xf9  0xf8
-0xf7  0xf6  0xf5  0xf4  0xf3  0xf2  0xf1  0xf0
-0xef  0xee  0xed  0xec  0xeb  0xea  0xe9  0xe8
-0xe7  0xe6  0xe5  0xe4  0xe3  0xe2  0xe1  0xe0
-
-Master received data :
-0xff  0xfe  0xfd  0xfc  0xfb  0xfa  0xf9  0xf8
-0xf7  0xf6  0xf5  0xf4  0xf3  0xf2  0xf1  0xf0
-0xef  0xee  0xed  0xec  0xeb  0xea  0xe9  0xe8
-0xe7  0xe6  0xe5  0xe4  0xe3  0xe2  0xe1  0xe0
-
-End of I2C example .
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LPCMP Interrupt Example.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
